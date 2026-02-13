@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0, user-scalable=yes">
+    <title>粤教版·七年级地理上册 全册思维导图</title>
+    <!-- Font Awesome 6 图标库 (美化用) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* 全局样式 —— 干净、卡片式思维导图风格，适合截图保存为图片 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(145deg, #f6f9fc 0%, #edf2f7 100%);
+            padding: 2rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .mindmap-container {
+            max-width: 1400px;
+            width: 100%;
+            background: rgba(255,255,255,0.3);
+            backdrop-filter: blur(2px);
+            border-radius: 48px 48px 32px 32px;
+            padding: 2rem 2rem 2.2rem;
+            box-shadow: 0 20px 40px -12px rgba(0,20,40,0.25);
+        }
+
+        /* 主标题 —— 中心节点效果 */
+        .main-title {
+            text-align: center;
+            margin-bottom: 2.5rem;
+            position: relative;
+        }
+
+        .main-title h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+            background: linear-gradient(135deg, #0b3d5f, #1a5e7c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 4px 12px rgba(27, 91, 121, 0.2);
+            margin-bottom: 0.2rem;
+        }
+
+        .main-title h2 {
+            font-size: 1.3rem;
+            font-weight: 400;
+            color: #2c6975;
+            background: rgba(255,255,255,0.6);
+            display: inline-block;
+            padding: 0.3rem 1.8rem;
+            border-radius: 40px;
+            backdrop-filter: blur(4px);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+            border: 1px solid rgba(200,225,235,0.6);
+        }
+
+        .main-title i {
+            color: #3a7b89;
+            margin-right: 8px;
+        }
+
+        /* 网格布局 —— 思维导图卡片流 */
+        .unit-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 1.8rem;
+            align-items: start;
+        }
+
+        /* 卡片样式 —— 每个单元是一个思维导图分支 */
+        .unit-card {
+            background: white;
+            border-radius: 24px;
+            padding: 1.5rem 1.3rem 1.8rem;
+            box-shadow: 0 10px 20px -8px rgba(0,32,48,0.12);
+            transition: all 0.15s ease;
+            border-top: 6px solid;
+            display: flex;
+            flex-direction: column;
+            height: fit-content;
+            backdrop-filter: blur(2px);
+            border-left: 1px solid rgba(255,255,255,0.6);
+            border-right: 1px solid rgba(255,255,255,0.6);
+            border-bottom: 1px solid rgba(255,255,255,0.6);
+        }
+
+        .unit-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 24px 32px -12px rgba(19, 79, 102, 0.2);
+        }
+
+        /* 单元标题栏 —— 带图标 */
+        .unit-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 1.3rem;
+            border-bottom: 2px dashed #e7edf2;
+            padding-bottom: 0.8rem;
+        }
+
+        .unit-header i {
+            font-size: 1.9rem;
+            color: inherit;
+        }
+
+        .unit-header h3 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            line-height: 1.2;
+            color: #1e3b4a;
+            margin: 0;
+        }
+
+        .unit-header span {
+            font-size: 0.9rem;
+            background: #eef5f7;
+            padding: 2px 10px;
+            border-radius: 30px;
+            color: #2e6b7c;
+            font-weight: 500;
+            margin-left: auto;
+        }
+
+        /* 层级列表 —— 模仿思维导图分支 */
+        .mind-map-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .mind-map-list li {
+            margin-bottom: 0.5rem;
+            line-height: 1.45;
+            color: #194351;
+            position: relative;
+            padding-left: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .mind-map-list li i {
+            color: #3f8ba0;
+            width: 1.1rem;
+            text-align: center;
+            position: absolute;
+            left: 0;
+            top: 0.2rem;
+            font-size: 0.85rem;
+        }
+
+        /* 二级列表（嵌套） */
+        .mind-map-list ul {
+            list-style: none;
+            padding-left: 1.2rem;
+            margin-top: 0.3rem;
+            margin-bottom: 0.3rem;
+            border-left: 2px dotted #b9d8e3;
+        }
+
+        .mind-map-list ul li {
+            padding-left: 1.6rem;
+            font-size: 0.9rem;
+            color: #215b66;
+            margin-bottom: 0.3rem;
+        }
+
+        .mind-map-list ul li i {
+            left: 0.2rem;
+            font-size: 0.75rem;
+            color: #5f9db2;
+        }
+
+        /* 三级列表 (紧凑) */
+        .mind-map-list ul ul {
+            padding-left: 1rem;
+            border-left-style: dashed;
+            border-left-color: #cfe1e7;
+        }
+
+        .mind-map-list ul ul li {
+            font-size: 0.86rem;
+            color: #2f5e68;
+        }
+
+        /* 强调重点 */
+        .highlight {
+            font-weight: 600;
+            color: #0a4b5c;
+            background: linear-gradient(120deg, rgba(144,202,221,0.2) 0%, rgba(144,202,221,0.1) 100%);
+            padding: 0 4px;
+            border-radius: 4px;
+        }
+
+        .badge {
+            background: #deeef2;
+            border-radius: 16px;
+            padding: 2px 10px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #1f616e;
+            display: inline-block;
+            margin-left: 6px;
+        }
+
+        /* 卡片颜色区分 —— 单元色带 */
+        .unit-card:nth-child(1) { border-top-color: #7f9da5; } /* 前言 */
+        .unit-card:nth-child(2) { border-top-color: #4298b4; } /* 一单元 */
+        .unit-card:nth-child(3) { border-top-color: #3a6ea5; } /* 二单元 */
+        .unit-card:nth-child(4) { border-top-color: #4c9a7b; } /* 三单元 */
+        .unit-card:nth-child(5) { border-top-color: #e68c4a; } /* 四单元 */
+        .unit-card:nth-child(6) { border-top-color: #a67db0; } /* 五单元 */
+        .unit-card:nth-child(7) { border-top-color: #c06d5b; } /* 六单元 */
+
+        /* 图标与文字对齐优化 */
+        .footer-note {
+            margin-top: 2.8rem;
+            text-align: center;
+            color: #4f6f7a;
+            font-size: 0.85rem;
+            border-top: 1px solid rgba(120, 160, 170, 0.25);
+            padding-top: 1.5rem;
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-note i {
+            margin-right: 6px;
+            color: #568e9c;
+        }
+
+        @media (max-width: 750px) {
+            .mindmap-container { padding: 1.5rem; }
+            .main-title h1 { font-size: 2rem; }
+            .unit-grid { grid-template-columns: 1fr; }
+        }
+        @media print {
+            body { background: white; }
+            .unit-card { break-inside: avoid; }
+        }
+    </style>
+</head>
+<body>
+    <div class="mindmap-container">
+        <!-- 中心主题：粤教版七年级地理上册 全貌 -->
+        <div class="main-title">
+            <h1><i class="fas fa-globe-asia"></i> 粤教版·地理七年级上册 <i class="fas fa-map"></i></h1>
+            <h2><i class="fas fa-sitemap"></i> 全册思维导图·2024课标整合版 · 六大单元+前言</h2>
+        </div>
+
+        <!-- 思维导图卡片网格 —— 每一个卡片都是一个核心分支 -->
+        <div class="unit-grid">
+            
+            <!-- 前言卡片：让地理走进生活 -->
+            <div class="unit-card">
+                <div class="unit-header">
+                    <i class="fas fa-compass" style="color: #5f8a92;"></i>
+                    <h3>🌱 前言 <br><span style="font-size:0.9rem;">让地理走进生活</span></h3>
+                    <span>入门</span>
+                </div>
+                <ul class="mind-map-list">
+                    <li><i class="fas fa-dot-circle"></i> <span class="highlight">地理学什么</span>：自然地理 · 人文地理</li>
+                    <li><i class="fas fa-dot-circle"></i> <span class="highlight">生活与地理</span>
+                        <ul>
+                            <li><i class="fas fa-tshirt"></i> 衣：原料产地/气候适应</li>
+                            <li><i class="fas fa-utensils"></i> 食：南稻北麦、饮食文化</li>
+                            <li><i class="fas fa-home"></i> 住：民居与环境（竹楼/窑洞）</li>
+                            <li><i class="fas fa-car"></i> 行：出行选址、交通规划</li>
+                        </ul>
+                    </li>
+                    <li><i class="fas fa-dot-circle"></i> <span class="highlight">学习方法</span>
+                        <ul>
+                            <li><i class="fas fa-hammer"></i> 勤于实践</li>
+                            <li><i class="fas fa-map"></i> 乐于读图</li>
+                            <li><i class="fas fa-brain"></i> 善于积累</li>
+                            <li><i class="fas fa-flask"></i> 勇于探究</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- 第一单元：地理工具与地理实践 -->
+            <div class="unit-card">
+                <div class="unit-header">
+                    <i class="fas fa-tools" style="color: #4298b4;"></i>
+                    <h3>📦 第一单元 <br>地理工具与地理实践</h3>
+                    <span>新教材核心</span>
+                </div>
+                <ul class="mind-map-list">
+                    <li><i class="fas fa-earth-asia"></i> <span class="highlight">地球仪</span>
+                        <ul>
+                            <li><i class="fas fa-circle"></i> 形状：两极稍扁、赤道略鼓 (平均6371km)</li>
+                            <li><i class="fas fa-grid"></i> 经纬线：纬线(圆/东西) · 经线(半圆/南北)</li>
+                            <li><i class="fas fa-location-dot"></i> 经纬网：航海/航空/军事定位</li>
+                            <li><i class="fas fa-diagram-project"></i> 半球划分：赤道南北·20°W&160°E东西</li>
+                        </ul>
+                    </li>
+                    <li><i class="fas fa-map-location-dot"></i> <span class="highlight">地图</span>
+                        <ul>
+                            <li><i class="fas fa-arrows-up-down"></i> 三要素：比例尺·方向·图例注记</li>
+                            <li><i class="fas fa-mountain"></i> 地形图判读：等高线(密陡疏缓)·地形部位·分层设色</li>
+                            <li><i class="fas fa-map"></i> 类型：政区/交通/旅游/电子地图</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- 第二单元：地球的宇宙环境 -->
+            <div class="unit-card">
+                <div class="unit-header">
+                    <i class="fas fa-rocket" style="color: #3a6ea5;"></i>
+                    <h3>🌌 第二单元 <br>地球的宇宙环境</h3>
+                    <span>新增</span>
+                </div>
+                <ul class="mind-map-list">
+                    <li><i class="fas fa-solar-system"></i> <span class="highlight">宇宙中的地球</span>
+                        <ul>
+                            <li><i class="fas fa-star"></i> 天体系统：宇宙→银河系→太阳系→地月系</li>
+                            <li><i class="fas fa-planet-ring"></i> 太阳系位置：水金地火木土天海；地球第三近</li>
+                            <li><i class="fas fa-water"></i> 地球优势：液态水·大气·适宜温度</li>
+                        </ul>
+                    </li>
+                    <li><i class="fas fa-satellite"></i> <span class="highlight">太空探索</span>
+                        <ul>
+                            <li><i class="fas fa-flag"></i> 世界：1957苏联首星；加加林首人</li>
+                            <li><i class="fas fa-china"></i> 中国：东方红一号、神舟(杨利伟)、嫦娥、祝融、羲和、天宫</li>
+                            <li><i class="fas fa-handshake"></i> 意义：和平利用·造福人类</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- 第三单元：地球的运动 -->
+            <div class="unit-card">
+                <div class="unit-header">
+                    <i class="fas fa-sync" style="color: #4c9a7b;"></i>
+                    <h3>🔄 第三单元 <br>地球的运动</h3>
+                    <span>必考</span>
+                </div>
+                <ul class="mind-map-list">
+                    <li><i class="fas fa-rotate"></i> <span class="highlight">自转</span>
+                        <ul>
+                            <li><i class="fas fa-arrow-right"></i> 方向周期：自西向东 (北逆南顺) / 约24h</li>
+                            <li><i class="fas fa-sun"></i> 现象：昼夜更替、日月星辰东升西落、时差</li>
+                            <li><i class="fas fa-clock"></i> 时区：东八区(北京时间)</li>
+                        </ul>
+                    </li>
+                    <li><i class="fas fa-rotate-left"></i> <span class="highlight">公转</span>
+                        <ul>
+                            <li><i class="fas fa-calendar"></i> 周期：约365天 (自西向东)</li>
+                            <li><i class="fas fa-tree"></i> 二分二至(北半球)：春分(3.21)/夏至(6.22)/秋分(9.23)/冬至(12.22)</li>
+                            <li><i class="fas fa-temperature-high"></i> 五带：热带·南北温带·南北寒带</li>
+                            <li><i class="fas fa-leaf"></i> 四季：南北半球相反</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- 第四单元：自然地理环境（核心重难点） -->
+            <div class="unit-card">
+                <div class="unit-header">
+                    <i class="fas fa-mountain" style="color: #e68c4a;"></i>
+                    <h3>🌍 第四单元 <br>自然地理环境</h3>
+                    <span>核心</span>
+                </div>
+                <ul class="mind-map-list">
+                    <li><i class="fas fa-water"></i> <span class="highlight">陆地与海洋</span>
+                        <ul>
+                            <li><i class="fas fa-globe"></i> 海陆分布：29%陆·71%海；北半球多陆</li>
+                            <li><i class="fas fa-map"></i> 七大洲：亚非北南美，南极欧大洋；洲界线</li>
+                            <li><i class="fas fa-ocean"></i> 四大洋：太大印北</li>
+                            <li><i class="fas fa-mountain"></i> 陆地地形：山地/高原/丘陵/平原/盆地；世界之最</li>
+                            <li><i class="fas fa-umbrella"></i> 海底地形：大陆架/坡/洋盆/洋脊/海沟</li>
+                            <li><i class="fas fa-hammer"></i> 海陆变迁：板块构造·六大板块·两大地震带</li>
+                        </ul>
+                    </li>
+                    <li><i class="fas fa-cloud-sun-rain"></i> <span class="highlight">天气与气候</span>
+                        <ul>
+                            <li><i class="fas fa-cloud"></i> 天气：短时/多变/符号/卫星云图</li>
+                            <li><i class="fas fa-temperature-low"></i> 气温：时空分布·垂直递减(0.6℃/100m)</li>
+                            <li><i class="fas fa-droplet"></i> 降水：对流/地形/锋面；赤道多,副热少</li>
+                            <li><i class="fas fa-earth"></i> 气候类型：热带·温带·寒带·高山高原</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- 第五单元：居民与聚落 -->
+            <div class="unit-card">
+                <div class="unit-header">
+                    <i class="fas fa-city" style="color: #a67db0;"></i>
+                    <h3>🏙️ 第五单元 <br>居民与聚落</h3>
+                    <span>人文</span>
+                </div>
+                <ul class="mind-map-list">
+                    <li><i class="fas fa-people-arrows"></i> <span class="highlight">世界的人口</span>
+                        <ul>
+                            <li><i class="fas fa-chart-line"></i> 增长：工业革命后加快；发展中国家“爆炸”</li>
+                            <li><i class="fas fa-location-dot"></i> 分布：四密(东亚/南亚/西欧/北美东北)；四疏</li>
+                            <li><i class="fas fa-exclamation-triangle"></i> 问题：过快/过慢（老龄化）</li>
+                            <li><i class="fas fa-people-arrows"></i> 迁移：推力/拉力</li>
+                        </ul>
+                    </li>
+                    <li><i class="fas fa-language"></i> <span class="highlight">人种·语言·宗教</span>
+                        <ul>
+                            <li><i class="fas fa-user"></i> 三大人种：黄/白/黑</li>
+                            <li><i class="fas fa-language"></i> 语言：汉语(人数最多)·英语(范围最广)</li>
+                            <li><i class="fas fa-place-of-worship"></i> 三大宗教：基督教/伊斯兰教/佛教</li>
+                        </ul>
+                    </li>
+                    <li><i class="fas fa-house-chimney"></i> <span class="highlight">聚落的发展</span>
+                        <ul>
+                            <li><i class="fas fa-building"></i> 分类：城市/乡村</li>
+                            <li><i class="fas fa-house-circle-check"></i> 民居与环境：傣家竹楼、窑洞、冰屋</li>
+                            <li><i class="fas fa-UNESCO"></i> 世界文化遗产保护</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- 第六单元：发展差异与国际合作 -->
+            <div class="unit-card">
+                <div class="unit-header">
+                    <i class="fas fa-handshake" style="color: #c06d5b;"></i>
+                    <h3>🤝 第六单元 <br>发展差异与国际合作</h3>
+                    <span>全球视野</span>
+                </div>
+                <ul class="mind-map-list">
+                    <li><i class="fas fa-chart-simple"></i> <span class="highlight">发展差异</span>
+                        <ul>
+                            <li><i class="fas fa-arrow-trend-up"></i> 划分标准：人均GDP、产业结构、医疗教育</li>
+                            <li><i class="fas fa-flag-usa"></i> 发达国家：欧美日澳；科技/服务业主导</li>
+                            <li><i class="fas fa-flag-africa"></i> 发展中国家：亚非拉；南北差距</li>
+                            <li><i class="fas fa-comments"></i> 南北关系：南北对话、南南合作</li>
+                        </ul>
+                    </li>
+                    <li><i class="fas fa-globe"></i> <span class="highlight">国际合作</span>
+                        <ul>
+                            <li><i class="fas fa-industry"></i> 经济全球化：跨国公司、分工协作</li>
+                            <li><i class="fas fa-flag-united-nations"></i> 国际组织：UN、WTO、EU、东盟、非盟</li>
+                            <li><i class="fas fa-road"></i> 中国角色：“一带一路”、人类命运共同体</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div> <!-- 网格结束 -->
+
+        <!-- 底部图例/说明 —— 增添思维导图整体感 -->
+        <div class="footer-note">
+            <span><i class="fas fa-check-circle" style="color: #3c8d8f;"></i> 2024粤人版·新教材第一~四单元 + 传统居民发展单元</span>
+            <span><i class="fas fa-lightbulb"></i> 全册知识·一图整合  |  截图即思维导图</span>
+            <span><i class="fas fa-print"></i> 建议导出为图片或打印</span>
+        </div>
+    </div>
+    <!-- 注：本页面为纯HTML+CSS思维导图可视化，所有知识点覆盖粤教版七年级上册 -->
+</body>
+</html>
